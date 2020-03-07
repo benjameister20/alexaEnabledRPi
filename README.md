@@ -23,8 +23,8 @@ If you're a returning developer, click __PRODUCTS__ then __ADD NEW PRODUCT__.
 
 ## Fill in product information
 
-| Note: These instructions are for developers prototyping on Raspberry Pi. If you are registering a commercial product profile, you will want to use your own custom information here. 
-------------------------
+| Note: These instructions are for developers prototyping on Raspberry Pi. If you are registering a commercial product profile, you will want to use your own custom information here. |
+| ------------------------ |
 
 1. _Product Name_: Use __AVS Tutorials Project__.
 2. _Product ID_: Use __PrototypePi__. No spaces are allowed for the _Product ID_ field.
@@ -78,7 +78,7 @@ This tutorial is purely for prototyping on a RaspberryPi. However, if you decide
 2. Near the top of the page, select the commercial device security profile you created earlier (e.g., __AVS Tutorials Project__ if you used the example values) from the drop-down menu and click the __CONFIRM__ button.
 ![](https://i.imgur.com/K0rD28h.png)
 
-3. Enter your privacy policy URL beginning with http:// or https://.
+3. Enter your privacy policy URL beginning with http:// or https://. For the purposes of this tutorial, enter __http://example.com/privacy.html__
 4. You may upload an image. The image will be shown on the Login with Amazon consent page to give your users context.
 5. Click the __SAVE__ button.
 ![](https://i.imgur.com/684jPHi.png)
@@ -88,10 +88,10 @@ Now that you've created your product profile, it's time to get your hardware and
 
 ---------------------------------------------------------------------------
 # Required Hardware
-The following guide provides step-by-step instructions to set up the Alexa Voice Service (AVS) Device 1.17 SDK on a Raspberry Pi. It uses a handful of scripts to download, build, and run the AVS Device SDK with wake word detection enabled. When finished, you'll have a working sample app to test interactions with Alexa.
+The following guide provides step-by-step instructions to set up the Alexa Voice Service (AVS) Device 1.17 SDK on a [Raspberry Pi](https://www.raspberrypi.org/). It uses a handful of scripts to download, build, and run the AVS Device SDK with wake word detection enabled. When finished, you'll have a working sample app to test interactions with Alexa.
 
 ## Basic Tutorial
-You need the following equipment to finish the basic tutorial — [Prototype with Raspberry Pi](https://developer.amazon.com/en-US/docs/alexa/alexa-voice-service/set-up-raspberry-pi.html).
+You need the following equipment to finish the basic tutorial:
 
 - __Raspberry Pi__ - Use a Raspberry Pi 3 or 4.
 - __Micro SD card__ - Minimum 8 GB.
@@ -101,7 +101,7 @@ You need the following equipment to finish the basic tutorial — [Prototype wit
 - __HDMI monitor__ - Choose any compatible monitor. Alternatively, you can remote [SSH](https://www.raspberrypi.org/documentation/remote-access/ssh/) into your Pi.
 - __Internet connection__ - Ethernet connection or a 2.4 GHZ Wi-Fi.
 
-For a list of Amazon's recommended parts, see [here](https://www.amazon.com/ideas/amzn1.account.AGPAZ4ESD2KHDFMOAYU7NDDYNBAA/8JYBRL3A82AN?ref=idea_share). For the exact parts in this tutorial, see [here]().
+For a list of Amazon's recommended parts, see [here](https://www.amazon.com/ideas/amzn1.account.AGPAZ4ESD2KHDFMOAYU7NDDYNBAA/8JYBRL3A82AN?ref=idea_share). For the exact parts in this tutorial, see [here](http://a.co/caPH2Nu).
 
 Next, [set up your Raspberry Pi](#Set-Up-Raspberry-Pi) and install the software required to run the SDK.
 
@@ -111,8 +111,8 @@ Next, [set up your Raspberry Pi](#Set-Up-Raspberry-Pi) and install the software 
 
 ## Download Raspbian NOOBS to a Micro SD Card
 
-|  Note: Some Raspberry Pi kits ship with a preinstalled version of NOOBS. Check your device packaging for verification. Amazon's parts list includes an SD card that does not have NOOBS installed. This guide's recommended parts list comes with a pre-installed NOOBS card. 
-------------------------
+| Note: Some Raspberry Pi kits ship with a preinstalled version of NOOBS. Check your device packaging for verification. Amazon's parts list includes an SD card that does NOT have NOOBS installed. This guide's recommended parts list comes with a pre-installed NOOBS card. |
+| ------------------------ |
 
 Before powering on your Raspberry Pi, you must download an operating system (OS) — using your Linux, MacOS or Windows PC — and copy it to an SD Card. For this tutorial, we're using Raspbian NOOBS OS version 2.9.0.
 
@@ -142,10 +142,10 @@ Connect the Pi to a power source. A loading screen automatically launches and wa
 
 ## Install the Raspbian OS
 
-| Note: Use Raspbian Stretch or Raspbian Buster with the AVS Device 1.17 SDK.
-------------------------
+| Note: Use Raspbian Stretch or Raspbian Buster with the AVS Device 1.17 SDK. |
+| ------------------------ |
 
-Upon successful startup, you're prompted to select an operating system and locale. NOOB always retrieves the latest version of Rasbian that is avaialble.
+Upon successful startup, you're prompted to select an operating system and locale. NOOBS always retrieves the latest version of Rasbian that is avaialble.
 
 1. Check the box next to __Raspbian [RECOMMENDED]__.
 2. Select your language and keyboard preferences at the bottom of the screen.
@@ -155,13 +155,34 @@ Upon successful startup, you're prompted to select an operating system and local
 It should take around 15 minutes to fully install. After it's done, you'll see a success message. Click __OK__ and the desktop loads — feel free to close the window when it asks you to change your password or do any other setup steps.
 
 ## Setting up Virtual Network Computing (VNC)
-TODO
+
+So the RaspberryPi does not have to be continuously plugged into a monitor, the first thing we will do is set up VNC. The full documentation for RPi VNC can be found [here](https://www.raspberrypi.org/documentation/remote-access/vnc/). Note, that the RPi does have be connected to internet before this step will work.
+
+To set up VNC, complete the following steps:
+1. Click the small black rectangle in the upper left hand corner of the screen to open the __Terminal__ application.
+2. Type `sudo apt install realvnc-vnc-server realvnc-vnc-viewer`. Note that you might be prompted to enter your password.
+3. Once the installation process is complete, type __"hostname -I"__. This will show you the IP address which you need to keep track of.
+4. In the top left corner of your Pi, click the Raspberry symbol to open up the __Menu__.
+5. Click __Preferences__ then __Raspberry Pi Configuration__.
+6. From the tabs at the top, now click __Interfaces__ then __Enable__ next to the VNC option.
+7. Finally, click __OK__.
+8. Go to your laptop or desktop computer (not your RaspberryPi) and download RealVNC from [this website](https://www.realvnc.com/en/connect/download/viewer/).
+9. Click through all the steps on the installer and make sure to accept the terms and conditions.
+10. On Windows, click __Yes__ when it asks _Do you want to let this program make changes to your computer?_
+11. Open up __VNCViewer__ on your computer.
+12. Type in the IP address for the RaspberryPi where it says _Enter in a VNC server address or search_.
+13. Hit the __Enter__ key.
+
+Congratulations! You can now disconnect your Raspberry Pi from the monitor and control it remotely.
 
 ## Configure OS Settings
 Configure the following OS settings before building the AVS Device SDK.
 ![](https://i.imgur.com/P14xNn5.png)
 
 ### Network
+
+Only do this step if you did not setup a network when setting up the device.
+
 Connect your Pi to a network. You can choose either option.
 
 - __Ethernet__: Plug an ethernet cable into the Pi. The OS automatically connects to your network.
@@ -169,28 +190,24 @@ Connect your Pi to a network. You can choose either option.
 
 Verify that you're connected to a network by opening a web browser — click on the __globe icon__ in the top-left toolbar and navigate to a website.
 
+### Connect device to Enterprise network
+If you are on an enterprise network, you will need to register your device before it will work properly. This can usually be done by simply opening a browser tab and being automatically navigated to the enterprise network login. However, it might be necessary to contact your Enterprise network administrators for internet access.
+
 ### Audio
 A Raspberry Pi can output sound through two different channels, an HDMI port or a 3.5mm audio jack. HDMI is the default selection when you install a fresh OS. To output sound to your speaker, change the output channel on your Pi to __3.5mm audio jack__.
 
 1. Right-click on the speaker graphic in the upper-right hand corner of your Pi.
 2. Select __Analog__.
-3. 
+
 You should also turn up the volume the microphone.
 
-1. Go to __Audio Device Settings__.
-2. Select __Change Sound Card__.
-3. Select the drop down and select __USB PNP (Asla mixer)__.
-4. Select __Controls__.
-5. Click the microphone and change the volume to max.
-
-
-### Keyboard
-You can change your keyboard settings.
-
-1. Click on the Raspberry icon in the top right of your desktop.
-2. Select __Mouse and Keyboard settings__ from the __Preferences__ menu.
-3. Click __Keyboard Layout__ from the __Keyboard__ tab.
-4. Select the appropriate configuration. Make sure whatever you pick, you can write characters such as "quotes" and @ symbols.
+1. Click on the __RaspberryPi Symbol__ in the top left of the screen.
+2. Click __Preferences__
+3. Go to __Audio Device Settings__.
+4. Select the drop down and select __USB PNP (Asla mixer)__.
+5. Click __Select Controls__.
+6. Check the box next to __Microphone__ and click __OK__.
+7. Change the volume to max and click __OK__.
 
 
 ### Update Pi Packages List
@@ -203,8 +220,8 @@ cd /home/pi/
 sudo apt-get upgrade
 ```
 
-| Note: This guide presumes that you're using the default home directory of `/home/pi`. If you choose to use different folder names, update the commands throughout this guide accordingly.
-------------------------
+| Note: This guide presumes that you're using the default home directory of `/home/pi`. If you choose to use different folder names, update the commands throughout this guide accordingly. |
+| ------------------------ |
  
 Next, [register an AVS product and create a security profile](#Input-AVS-Credentials) for your device.
 
@@ -215,20 +232,21 @@ Next, [register an AVS product and create a security profile](#Input-AVS-Credent
 Before you build the AVS Device SDK, you need to register an AVS product and create a security profile. When finished, you download a config.json file that contains your client ID and client secret. These retrieve access and refresh tokens that authorize your interactions with Alexa.
 
 ## Download your Config.json File
-|  Note: If you haven't registered your product yet, complete the Create Product Profile tutorial to generate your config.json file.
-------------------------
+| Note: If you haven't registered your product yet, complete the Create Product Profile tutorial to generate your config.json file. |
+| ------------------------ |
 
-You need to download your config.json file and move into your `/home/pi` folder. You might have already done these steps if you completed the [Create Product Profile]() tutorial. If so, skip to the next section, [Build the AVS Device SDK]().
+You need to download your config.json file and move into your `/home/pi` folder. You might have already done these steps if you completed the [Create Product Profile](##Set-up-your-security-profile) tutorial. If so, skip to the next section, [Build the AVS Device SDK](#Build-the-AVS-Device-SDK).
 
 1. Log into your [AVS dashboard](https://developer.amazon.com/alexa/console/avs#/avs/home).
-2. Click on your Product Name (it should be __AVS Tutorials Project__ or whatever you named it when creating the product profile).
-3. Under the __Product Details__ menu, select __Security Profile__.
-4. Choose __Other devices and platforms from the Web - Android/Kindle - iOS - Other devices and platforms__ from the menu.
-5. Click __Download__. The config.json file appears in your `/home/pi/downloads` folder. In the file manager, copy this file from the `/downloads` folder and place it in your `/home/pi` folder as shown in the picture below.
+2. Click __Products__.
+3. Click on your Product Name (it should be __AVS Tutorials Project__ or whatever you named it when creating the product profile).
+4. Under the __Product Details__ menu, select __Security Profile__.
+5. Choose __Other devices and platforms from the Web - Android/Kindle - iOS - Other devices and platforms__ from the menu.
+6. Click __Download__. The config.json file appears in your `/home/pi/downloads` folder. In the file manager, copy this file from the `/downloads` folder and place it in your `/home/pi` folder as shown in the picture below.
 
 ![](https://i.imgur.com/J3XeIFf.png)
 
-Next, [build the AVS Device SDK]() to voice-enable your prototype.
+Next, [build the AVS Device SDK](#Build-the-AVS-Device-SDK) to voice-enable your prototype.
 
 
 
@@ -267,21 +285,21 @@ The field in brackets is the __Device Serial Number__ which is unique to each in
 ## Agree to the Terms and Conditions
 
 ### Third-party Libraries
-When prompted with the licensing terms from our third-party libraries, enter __AGREE__ — Unless, of course, you disagree! Agreeing to the conditions starts the installation process which might take over 20 minutes.
+When prompted with the licensing terms from our third-party libraries, enter __"AGREE"__ — Unless, of course, you disagree! Agreeing to the conditions starts the installation process which might take over 20 minutes.
 
 ### Sensory Wake Word
 At some point, the SDK installation pauses and asks you to accept Sensory Wake Word's terms and conditions — you must type __yes__ to accept. The __Wake Word Engine__ (WWE) from Sensory compares incoming audio to an onboard model of a wake word (e.g., __"Alexa"__), and initiates the transmission of audio to the cloud when triggered.
 
 The WWE is for __prototyping devices only__. If you intend to ship a commercial device, you must get a WWE license.
 
-| Note: The AVS Device SDK is modular and flexible. When you're ready to build your product, you're able to change your WWE. Remember that for AVS products, the wake word must be __Alexa__ so that your customers aren't confused about how to interact with your device.
-------------------------
+| Note: The AVS Device SDK is modular and flexible. When you're ready to build your product, you're able to change your WWE. Remember that for AVS products, the wake word must be __Alexa__ so that your customers aren't confused about how to interact with your device. |
+| ------------------------ |
 
 Once you've finished compiling, a success message appears — __[100%] Built Target SampleApp__. If your device freezes - don't worry, restart it by unplugging your Pi's power cord. When you get back to your desktop, re-run the above setup.sh command to finish your install.
 
 ![](https://i.imgur.com/C2T5our.png)
 
-Next, [launch the sample app and get a refresh token from AVS](). A refresh token allows your device to authenticate with the cloud via Login With Amazon (LWA).
+Next, [launch the sample app and get a refresh token from AVS](#Get-a-Refresh-Token). A refresh token allows your device to authenticate with the cloud via Login With Amazon (LWA).
 
 
 
@@ -297,14 +315,14 @@ In a terminal window, navigate to the `/home/pi` directory and run __tartsample.
 cd /home/pi/
 sudo bash startsample.sh
 ```
-|  Warning: The sample app won't run without a working USB microphone connected to your Pi.
-------------------------
+|  Warning: The sample app won't run without a working USB microphone connected to your Pi. |
+| ------------------------ |
 
 ## Get your Authorization Code
 Once the sample app starts, you'll see a series of rapidly scrolling debug messages in the terminal window stating, __Checking for authorization__. Scroll through the debug messages and look for a box with a URL, it contains your Alexa authorization code.
 
-| Note: Don't close the sample app after you find the authorization code.
-------------------------
+| Note: Don't close the sample app after you find the authorization code. |
+| ------------------------ |
 
 ## Submit your Authorization Code
 
