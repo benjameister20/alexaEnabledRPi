@@ -23,8 +23,9 @@ If you're a returning developer, click __PRODUCTS__ then __ADD NEW PRODUCT__.
 
 ## Fill in product information
 
-| Note: These instructions are for developers prototyping on Raspberry Pi. If you are registering a commercial product profile, you will want to use your own custom information here. |
-| ------------------------ |
+:::info
+Note: These instructions are for developers prototyping on Raspberry Pi. If you are registering a commercial product profile, you will want to use your own custom information here.
+:::
 
 1. _Product Name_: Use __AVS Tutorials Project__.
 2. _Product ID_: Use __PrototypePi__. No spaces are allowed for the _Product ID_ field.
@@ -56,7 +57,7 @@ See the image below for reference
 4. Write a name for your Client ID here - you can just use __Prototype__.
 5. Click __Generate ID__. You should get a Client ID and an option to download it.
 ![](https://i.imgur.com/DKQl950.png)
-6. If you're creating this product profile on your Raspberry Pi, click __Download__ to get your credentials onto your AVS prototype. Save the config.json file to your '`/home/pi` directory. If you are creating this profile from a different PC, that's OK - you can leave the file to be downloaded later.
+6. If you're creating this product profile on your Raspberry Pi, click __Download__ to get your credentials onto your AVS prototype. Save the config.json file to your `/home/pi` directory. If you are creating this profile from a different PC, that's OK - you can leave the file to be downloaded later.
 7. Check the box beside _I agree to the AVS agreement and the AVS Program Requirements._
 8. Click __FINISH__.
 
@@ -142,8 +143,9 @@ Connect the Pi to a power source. A loading screen automatically launches and wa
 
 ## Install the Raspbian OS
 
-| Note: Use Raspbian Stretch or Raspbian Buster with the AVS Device 1.17 SDK. |
-| ------------------------ |
+:::info
+Note: Use Raspbian Stretch or Raspbian Buster with the AVS Device 1.17 SDK.
+:::
 
 Upon successful startup, you're prompted to select an operating system and locale. NOOBS always retrieves the latest version of Rasbian that is avaialble.
 
@@ -206,7 +208,7 @@ You should also turn up the volume the microphone.
 3. Go to __Audio Device Settings__.
 4. Select the drop down and select __USB PNP (Asla mixer)__.
 5. Click __Select Controls__.
-6. Check the box next to __Microphone__ and click __OK__.
+6. Check the box next to __Microphone__ and click __Close__.
 7. Change the volume to max and click __OK__.
 
 
@@ -220,8 +222,9 @@ cd /home/pi/
 sudo apt-get upgrade
 ```
 
-| Note: This guide presumes that you're using the default home directory of `/home/pi`. If you choose to use different folder names, update the commands throughout this guide accordingly. |
-| ------------------------ |
+:::info
+Note: This guide presumes that you're using the default home directory of `/home/pi`. If you choose to use different folder names, update the commands throughout this guide accordingly.
+:::
  
 Next, [register an AVS product and create a security profile](#Input-AVS-Credentials) for your device.
 
@@ -232,8 +235,9 @@ Next, [register an AVS product and create a security profile](#Input-AVS-Credent
 Before you build the AVS Device SDK, you need to register an AVS product and create a security profile. When finished, you download a config.json file that contains your client ID and client secret. These retrieve access and refresh tokens that authorize your interactions with Alexa.
 
 ## Download your Config.json File
-| Note: If you haven't registered your product yet, complete the Create Product Profile tutorial to generate your config.json file. |
-| ------------------------ |
+:::info
+Note: If you haven't registered your product yet, complete the Create Product Profile tutorial to generate your config.json file.
+:::
 
 You need to download your config.json file and move into your `/home/pi` folder. You might have already done these steps if you completed the [Create Product Profile](##Set-up-your-security-profile) tutorial. If so, skip to the next section, [Build the AVS Device SDK](#Build-the-AVS-Device-SDK).
 
@@ -292,8 +296,9 @@ At some point, the SDK installation pauses and asks you to accept Sensory Wake W
 
 The WWE is for __prototyping devices only__. If you intend to ship a commercial device, you must get a WWE license.
 
-| Note: The AVS Device SDK is modular and flexible. When you're ready to build your product, you're able to change your WWE. Remember that for AVS products, the wake word must be __Alexa__ so that your customers aren't confused about how to interact with your device. |
-| ------------------------ |
+:::info
+Note: The AVS Device SDK is modular and flexible. When you're ready to build your product, you're able to change your WWE. Remember that for AVS products, the wake word must be __Alexa__ so that your customers aren't confused about how to interact with your device.
+:::
 
 Once you've finished compiling, a success message appears — __[100%] Built Target SampleApp__. If your device freezes - don't worry, restart it by unplugging your Pi's power cord. When you get back to your desktop, re-run the above setup.sh command to finish your install.
 
@@ -308,6 +313,7 @@ Next, [launch the sample app and get a refresh token from AVS](#Get-a-Refresh-To
 Your Raspberry Pi now has the AVS Device SDK installed and your credentials loaded, but your device still needs a __refresh token__ so your client maintains a connection to the Alexa Voice Service. If you design an Alexa-enabled product and ship a million of them to your customers, they can all use the same Client ID and ProductID - but each _individual_ device will require a __unique refresh token__ to authenticate with AVS through Login With Amazon (LWA).
 
 Normally, your customer gets a refresh token delivered when they activate your (their) device using a companion app, companion site, or [code-based linking](https://developer.amazon.com/en-US/docs/alexa/alexa-voice-service/code-based-linking-other-platforms.html) (CBL). For this tutorial, you're both the device maker _and_ the customer. You use the __startsample.sh__ script to launch the Sample App and request a refresh token for your prototype device.
+
 ## Start the Sample App
 In a terminal window, navigate to the `/home/pi` directory and run __tartsample.sh__.
 
@@ -315,26 +321,30 @@ In a terminal window, navigate to the `/home/pi` directory and run __tartsample.
 cd /home/pi/
 sudo bash startsample.sh
 ```
-|  Warning: The sample app won't run without a working USB microphone connected to your Pi. |
-| ------------------------ |
+:::danger
+Warning: The sample app won't run without a working USB microphone connected to your Pi.
+:::
 
 ## Get your Authorization Code
 Once the sample app starts, you'll see a series of rapidly scrolling debug messages in the terminal window stating, __Checking for authorization__. Scroll through the debug messages and look for a box with a URL, it contains your Alexa authorization code.
 
-| Note: Don't close the sample app after you find the authorization code. |
-| ------------------------ |
+:::info
+Note: Don't close the sample app after you find the authorization code.
+:::
 
 ## Submit your Authorization Code
 
 1. Go to amazon.com/us/code. Use any internet-connected device (for example, your phone).
 1. Log in with your Amazon developer credentials.
 3. Enter the authorization code, provided by your sample app, into the authorization box.
+4. Click __Continue__.
+5. Click __Allow__.
 
 It might take up to 30 seconds for `CBLAuthDelegate` to successfully get a refresh token from Login With Amazon (LWA). You'll get a success message, and your sample app should be ready to go!
 
 ![](https://i.imgur.com/ybonPFI.png)
 
-Your hard work has paid off, and now it's time to [Talk with Alexa]()
+Your hard work has paid off, and now it's time to [Talk with Alexa](#Talk-with-Alexa)
 
 
 
